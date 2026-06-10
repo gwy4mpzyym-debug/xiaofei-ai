@@ -2,19 +2,15 @@ services:
   - type: web
     name: small-business-ai-automation
     env: node
-    plan: starter
+    plan: free
     buildCommand: ""
     startCommand: "npm start"
     healthCheckPath: "/api/health"
-    disk:
-      name: app-data
-      mountPath: "/var/data"
-      sizeGB: 1
     envVars:
       - key: HOST
         value: "0.0.0.0"
       - key: DATA_DIR
-        value: "/var/data"
+        value: "/tmp/xiaofei-ai-data"
       - key: OPENAI_MODEL
         value: "gpt-4.1-mini"
       - key: PLATFORM_PASSWORD
