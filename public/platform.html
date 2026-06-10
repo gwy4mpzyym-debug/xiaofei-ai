@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>小老板 AI 自动化系统</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="shop-mark">
+        <div class="shop-logo" aria-hidden="true">AI</div>
+        <div>
+          <h1>小老板 AI 自动化系统</h1>
+          <p>把同一套 AI 接待系统复制卖给不同门店老板。</p>
+        </div>
+      </div>
+      <div class="top-status">
+        <span>可复制模板</span>
+        <span>网站 + 后台</span>
+      </div>
+    </header>
+
+    <main class="platform-page">
+      <section class="platform-hero">
+        <div>
+          <h2>你卖的不是一家店的网站，而是一套门店 AI 接待自动化</h2>
+          <p>每个老板只需要提供店名、服务、价格、地址、电话和营业时间，就能生成自己的顾客咨询页和老板后台。订阅开通后，顾客才能使用 AI 自动接待。</p>
+        </div>
+      </section>
+
+      <section class="pricing-panel">
+        <div class="panel-head">
+          <div>
+            <h2>订阅套餐</h2>
+            <p>老板付款后，你在平台后台给对应商家开通或续费。</p>
+          </div>
+        </div>
+        <div class="pricing-grid" id="planGrid"></div>
+      </section>
+
+      <section class="business-grid" id="businessGrid"></section>
+
+      <section class="creator-panel">
+        <div class="panel-head">
+          <div>
+            <h2 id="creatorTitle">新增老板客户</h2>
+            <p id="creatorSubtitle">填完资料后，系统会自动生成该老板的顾客页和后台。</p>
+          </div>
+          <button class="text-button" id="platformLogoutBtn" type="button" hidden>退出平台</button>
+        </div>
+
+        <form class="creator-form" id="creatorForm">
+          <div class="platform-login" id="platformLogin">
+            <label>
+              <span>平台密码</span>
+              <input id="platformPassword" type="password" placeholder="默认 admin123">
+            </label>
+            <button type="button" id="platformLoginBtn">解锁新增</button>
+          </div>
+
+          <div class="creator-grid" id="creatorFields" hidden>
+            <label>
+              <span>商家 ID</span>
+              <input name="id" placeholder="例如 nail-shop">
+            </label>
+            <label>
+              <span>店名</span>
+              <input name="name" placeholder="例如 阿美美甲店" required>
+            </label>
+            <label>
+              <span>行业</span>
+              <input name="category" placeholder="例如 美甲店" required>
+            </label>
+            <label>
+              <span>后台密码</span>
+              <input name="adminPassword" placeholder="新增时填写；编辑时留空则不改">
+            </label>
+            <label>
+              <span>电话</span>
+              <input name="phone" placeholder="老板电话或门店电话" required>
+            </label>
+            <label>
+              <span>营业时间</span>
+              <input name="hours" placeholder="例如 周一至周日 10:00-20:00" required>
+            </label>
+            <label class="wide">
+              <span>地址</span>
+              <input name="address" placeholder="门店地址" required>
+            </label>
+            <label class="wide">
+              <span>预约规则</span>
+              <input name="bookingPolicy" placeholder="例如 可先登记预约，最终由门店确认">
+            </label>
+            <label class="wide">
+              <span>服务项目</span>
+              <textarea name="services" placeholder="每行一个：服务名 | 价格 | 时长 | 关键词&#10;例如：美甲 | 68元起 | 60分钟 | 指甲,甲片"></textarea>
+            </label>
+            <label class="wide">
+              <span>转人工规则</span>
+              <textarea name="humanRules" placeholder="每行一个规则，例如：客户投诉或退款要求"></textarea>
+            </label>
+          </div>
+
+          <p class="form-error" id="creatorError"></p>
+          <div class="creator-result" id="creatorResult"></div>
+          <div class="creator-actions">
+            <button class="creator-submit" id="creatorSubmit" type="submit" hidden>生成商家网站</button>
+            <button class="text-button" id="cancelEditBtn" type="button" hidden>取消编辑</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="flow">
+        <h2>交付给老板的流程</h2>
+        <div class="flow-grid">
+          <div class="flow-step">
+            <b>1. 收集门店资料</b>
+            <span>店名、项目、价格、地址、电话、营业时间、人工接手规则。</span>
+          </div>
+          <div class="flow-step">
+            <b>2. 生成 AI 接待页</b>
+            <span>给老板一个二维码或链接，顾客扫码后可以直接咨询。</span>
+          </div>
+          <div class="flow-step">
+            <b>3. 自动整理线索</b>
+            <span>AI 提取手机号、预约时间、服务项目、意向分和下一步动作。</span>
+          </div>
+          <div class="flow-step">
+            <b>4. 老板后台跟进</b>
+            <span>老板登录后台，改状态、写备注、导出客户记录。</span>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/platform.js"></script>
+</body>
+</html>

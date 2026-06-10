@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI 自动化老板后台</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="shop-mark">
+        <div class="shop-logo" id="shopLogo" aria-hidden="true">AI</div>
+        <div>
+          <h1>老板后台</h1>
+          <p id="adminSubtitle">客户线索管理</p>
+        </div>
+      </div>
+      <div class="top-status">
+        <a class="admin-link" id="customerLink" href="/chat">顾客页面</a>
+        <button class="text-button" id="logoutBtn" type="button">退出</button>
+      </div>
+    </header>
+
+    <main class="admin-page">
+      <section class="login-panel" id="loginPanel">
+        <div class="panel-head">
+          <div>
+            <h2>老板登录</h2>
+            <p id="loginHint">输入该商家的后台密码。</p>
+          </div>
+        </div>
+        <form class="login-form" id="loginForm">
+          <label>
+            <span>后台密码</span>
+            <input id="passwordInput" type="password" autocomplete="current-password" placeholder="输入后台密码">
+          </label>
+          <button type="submit">登录后台</button>
+          <p id="loginError" class="form-error"></p>
+        </form>
+      </section>
+
+      <section class="admin-shell" id="adminShell" hidden>
+        <div class="stats-grid" id="statsGrid"></div>
+
+        <section class="admin-toolbar">
+          <div class="filter-tabs" id="filterTabs">
+            <button type="button" data-status="" class="active">全部</button>
+            <button type="button" data-status="new">新线索</button>
+            <button type="button" data-status="contacted">已联系</button>
+            <button type="button" data-status="booked">已预约</button>
+            <button type="button" data-status="done">已完成</button>
+            <button type="button" data-status="archived">归档</button>
+          </div>
+          <div class="toolbar-actions">
+            <a class="download-button" href="/api/admin/export.csv">导出 CSV</a>
+            <button class="text-button danger" id="resetBtn" type="button">清空线索</button>
+          </div>
+        </section>
+
+        <section class="leads-board">
+          <div class="panel-head">
+            <div>
+              <h2>客户线索</h2>
+            <p>把客户从“新线索”推进到已联系、已预约、已完成。</p>
+            </div>
+            <span id="leadCount">0 条</span>
+          </div>
+          <div class="admin-lead-list" id="adminLeadList"></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script src="/admin.js"></script>
+</body>
+</html>

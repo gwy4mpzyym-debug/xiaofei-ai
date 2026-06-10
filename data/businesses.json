@@ -1,0 +1,153 @@
+{
+  "xiaofei": {
+    "id": "xiaofei",
+    "initials": "XF",
+    "name": "小飞理发店",
+    "category": "理发店",
+    "adminPassword": "288133",
+    "phone": "288133",
+    "address": "海南省临高县加来镇新市路",
+    "hours": "周一至周日 9:00-18:00",
+    "bookingPolicy": "可先帮客户预留意向时间，最终档期由老板确认。",
+    "services": [
+      {
+        "name": "单剪",
+        "price": "19 元",
+        "duration": "30 分钟",
+        "aliases": [
+          "单剪",
+          "剪",
+          "理发",
+          "头发",
+          "发型",
+          "儿童",
+          "小孩",
+          "孩子"
+        ]
+      },
+      {
+        "name": "烫发",
+        "price": "99 元",
+        "duration": "2-3 小时",
+        "aliases": [
+          "烫发",
+          "烫",
+          "卷"
+        ]
+      }
+    ],
+    "humanRules": [
+      "客户投诉或退款要求",
+      "明确要求老板、店长或真人联系",
+      "大额团体预约",
+      "价格争议或特殊折扣",
+      "烫染前健康风险、过敏、头皮损伤等问题"
+    ],
+    "quickPrompts": [
+      {
+        "label": "问价格和时间",
+        "message": "单剪多少钱？今天下午能约吗？"
+      },
+      {
+        "label": "烫发咨询",
+        "message": "我想明天下午烫发，大概多少钱？"
+      },
+      {
+        "label": "儿童剪发",
+        "message": "我要带孩子来剪头发，下午五点可以吗？"
+      },
+      {
+        "label": "转人工",
+        "message": "我想找老板确认一下团体预约"
+      }
+    ],
+    "subscription": {
+      "planId": "month12",
+      "startsAt": "2026-06-10T00:00:00.000Z",
+      "expiresAt": "2099-12-31T23:59:59.000Z",
+      "updatedAt": "2026-06-10T00:00:00.000Z",
+      "trialStartedAt": "",
+      "trialUsedAt": "",
+      "paidStartedAt": "2026-06-10T00:00:00.000Z"
+    }
+  },
+  "beauty": {
+    "id": "beauty",
+    "initials": "HY",
+    "name": "花漾美容工作室",
+    "category": "美容店",
+    "adminPassword": "123456",
+    "phone": "0898-6666888",
+    "address": "演示地址：海口市美兰区海甸岛",
+    "hours": "周一至周日 10:00-20:00",
+    "bookingPolicy": "可以登记预约意向，最终由门店确认具体美容师和档期。",
+    "services": [
+      {
+        "name": "基础面部护理",
+        "price": "99 元",
+        "duration": "60 分钟",
+        "aliases": [
+          "基础面部护理",
+          "面部",
+          "护理",
+          "补水",
+          "清洁"
+        ]
+      },
+      {
+        "name": "美甲",
+        "price": "68 元起",
+        "duration": "60-90 分钟",
+        "aliases": [
+          "美甲",
+          "指甲",
+          "甲片"
+        ]
+      },
+      {
+        "name": "肩颈放松",
+        "price": "88 元",
+        "duration": "45 分钟",
+        "aliases": [
+          "肩颈放松",
+          "肩颈",
+          "按摩",
+          "放松"
+        ]
+      }
+    ],
+    "humanRules": [
+      "客户过敏、皮肤破损或医美相关问题",
+      "客户投诉或退款要求",
+      "明确要求店长或真人联系",
+      "团体预约或上门服务"
+    ],
+    "quickPrompts": [
+      {
+        "label": "面护价格",
+        "message": "基础面部护理多少钱？今天下午能约吗？"
+      },
+      {
+        "label": "美甲咨询",
+        "message": "我想明天下午做美甲，大概多少钱？"
+      },
+      {
+        "label": "营业时间",
+        "message": "你们几点营业？地址在哪里？"
+      },
+      {
+        "label": "转人工",
+        "message": "我皮肤容易过敏，想让店长确认一下"
+      }
+    ],
+    "subscription": {
+      "planId": "",
+      "startsAt": "",
+      "expiresAt": "",
+      "updatedAt": "",
+      "trialStartedAt": "",
+      "trialUsedAt": "",
+      "paidStartedAt": ""
+    }
+  }
+}

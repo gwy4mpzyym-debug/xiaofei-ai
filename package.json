@@ -1,0 +1,13 @@
+{
+  "name": "small-business-ai-automation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Multi-business AI receptionist website for local business owners.",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js && node --check public/app.js && node --check public/admin.js && node --check public/platform.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

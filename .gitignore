@@ -1,0 +1,11 @@
+.env
+.DS_Store
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local runtime data. Keep merchant templates in data/businesses.json,
+# but do not upload live customer leads.
+data/*-leads.json

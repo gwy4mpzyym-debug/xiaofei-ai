@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI 自动接待系统</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="shop-mark">
+        <div class="shop-logo" id="shopLogo" aria-hidden="true">AI</div>
+        <div>
+          <h1 id="shopName">AI 自动接待</h1>
+          <p>AI 接待系统</p>
+        </div>
+      </div>
+      <div class="top-status">
+        <span id="modeBadge">连接中</span>
+        <span id="modelBadge">-</span>
+        <span id="subscriptionBadge">订阅检查中</span>
+        <a class="admin-link" id="adminLink" href="/admin">老板后台</a>
+      </div>
+    </header>
+
+    <main class="layout customer-layout">
+      <section class="shop-panel">
+        <div class="shop-photo" aria-hidden="true">
+          <div class="stripe"></div>
+          <div class="chair"></div>
+          <div class="mirror"></div>
+        </div>
+        <div class="panel-head compact">
+          <h2>门店资料</h2>
+          <span id="openStatus">营业中</span>
+        </div>
+        <dl class="facts">
+          <div>
+            <dt>地址</dt>
+            <dd id="shopAddress">-</dd>
+          </div>
+          <div>
+            <dt>电话</dt>
+            <dd id="shopPhone">-</dd>
+          </div>
+          <div>
+            <dt>营业时间</dt>
+            <dd id="shopHours">-</dd>
+          </div>
+          <div>
+            <dt>预约规则</dt>
+            <dd id="shopPolicy">-</dd>
+          </div>
+        </dl>
+        <div class="service-list" id="serviceList"></div>
+      </section>
+
+      <section class="chat-panel">
+        <div class="panel-head">
+          <div>
+            <h2>在线咨询</h2>
+            <p id="chatSubtitle">询问价格、营业时间或预约。</p>
+          </div>
+          <button class="icon-button" id="clearChatBtn" type="button" title="清空对话" aria-label="清空对话">
+            <span aria-hidden="true">↻</span>
+          </button>
+        </div>
+        <div class="quick-row">
+          <span>加载快捷问题...</span>
+        </div>
+        <div class="messages" id="messages" aria-live="polite"></div>
+        <form class="composer" id="chatForm">
+          <textarea id="messageInput" aria-label="输入客户消息" placeholder="输入客户消息，例如：我想今天下午预约，多少钱？"></textarea>
+          <button type="submit">发送</button>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
