@@ -1,0 +1,16 @@
+[build]
+  publish = "public"
+  functions = "netlify/functions"
+
+[build.environment]
+  DATA_DIR = "/tmp/xiaofei-ai-data"
+  HOST = "0.0.0.0"
+  OPENAI_MODEL = "gpt-4.1-mini"
+  PLATFORM_PASSWORD = "admin123"
+  SESSION_SECRET = "xiaofei-ai-secret-20260611"
+
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/app/:splat"
+  status = 200
+  force = true

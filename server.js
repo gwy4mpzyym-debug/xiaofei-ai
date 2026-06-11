@@ -13,7 +13,8 @@ const SESSION_SECRET = process.env.SESSION_SECRET || crypto
   .update(`multi-business-ai:${ROOT}`)
   .digest("hex");
 const PUBLIC_DIR = path.join(ROOT, "public");
-const DATA_DIR = process.env.DATA_DIR || path.join(ROOT, "data");
+const SERVERLESS_DATA_DIR = (process.env.NETLIFY || process.env.VERCEL) ? "/tmp/xiaofei-ai-data" : "";
+const DATA_DIR = process.env.DATA_DIR || SERVERLESS_DATA_DIR || path.join(ROOT, "data");
 const BUSINESSES_FILE = path.join(DATA_DIR, "businesses.json");
 const PLATFORM_PASSWORD = process.env.PLATFORM_PASSWORD || "admin123";
 const LEAD_STATUSES = ["new", "contacted", "booked", "done", "archived"];
