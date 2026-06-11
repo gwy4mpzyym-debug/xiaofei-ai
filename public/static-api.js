@@ -1,6 +1,7 @@
 (() => {
   const params = new URLSearchParams(location.search);
-  const enabled = location.hostname.endsWith(".github.io") || location.protocol === "file:" || params.has("static");
+  const enabled = !window.XIAOFEI_API?.enabled?.()
+    && (location.hostname.endsWith(".github.io") || location.protocol === "file:" || params.has("static"));
   const PREFIX = "xiaofei-ai-static-v1:";
   const DEFAULT_BUSINESS_ID = "xiaofei";
   const PLATFORM_PASSWORD = "admin123";

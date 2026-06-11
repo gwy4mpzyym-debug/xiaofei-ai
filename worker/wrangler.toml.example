@@ -1,0 +1,15 @@
+name = "xiaofei-ai-api"
+main = "src/index.mjs"
+compatibility_date = "2026-06-11"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "xiaofei_ai"
+database_id = "PASTE_D1_DATABASE_ID_HERE"
+
+[vars]
+PLATFORM_PASSWORD = "admin123"
+SESSION_TTL_DAYS = "7"
+OPENAI_MODEL = "gpt-4.1-mini"
+# Optional after you are ready for real OpenAI replies:
+# OPENAI_API_KEY = "sk-..."

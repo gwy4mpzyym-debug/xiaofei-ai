@@ -73,6 +73,13 @@ function formatTime(value) {
 }
 
 async function api(path, options = {}) {
+  if (window.XIAOFEI_API) {
+    return window.XIAOFEI_API.request(path, {
+      businessId: adminState.businessId,
+      scope: "admin",
+      ...options
+    });
+  }
   const response = await fetch(withBusiness(path), {
     credentials: "same-origin",
     headers: { "Content-Type": "application/json" },
@@ -205,10 +212,11 @@ els.loginForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   els.loginError.textContent = "";
   try {
-    await api("/api/admin/login", {
+    const data = await api("/api/admin/login", {
       method: "POST",
       body: JSON.stringify({ password: els.passwordInput.value })
     });
+    if (data.token) window.XIAOFEI_API?.setToken("admin", adminState.businessId, data.token);
     els.passwordInput.value = "";
     setLoggedIn(true);
     await loadLeads();
@@ -219,6 +227,7 @@ els.loginForm.addEventListener("submit", async (event) => {
 
 els.logoutBtn.addEventListener("click", async () => {
   await api("/api/admin/logout", { method: "POST", body: "{}" });
+  window.XIAOFEI_API?.clearToken("admin", adminState.businessId);
   setLoggedIn(false);
 });
 

@@ -37,6 +37,12 @@ function escapeHtml(value) {
 }
 
 async function api(path, options = {}) {
+  if (window.XIAOFEI_API) {
+    return window.XIAOFEI_API.request(path, {
+      scope: "platform",
+      ...options
+    });
+  }
   const response = await fetch(path, {
     credentials: "same-origin",
     headers: { "Content-Type": "application/json" },
@@ -176,10 +182,11 @@ function parseRules(value) {
 platformLoginBtn.addEventListener("click", async () => {
   creatorError.textContent = "";
   try {
-    await api("/api/platform/login", {
+    const data = await api("/api/platform/login", {
       method: "POST",
       body: JSON.stringify({ password: platformPassword.value })
     });
+    if (data.token) window.XIAOFEI_API?.setToken("platform", "", data.token);
     platformPassword.value = "";
     setUnlocked(true);
     await loadBusinesses();
@@ -190,6 +197,7 @@ platformLoginBtn.addEventListener("click", async () => {
 
 platformLogoutBtn.addEventListener("click", async () => {
   await api("/api/platform/logout", { method: "POST", body: "{}" });
+  window.XIAOFEI_API?.clearToken("platform");
   setUnlocked(false);
   await loadBusinesses();
 });

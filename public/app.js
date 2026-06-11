@@ -82,6 +82,12 @@ function renderServices(services) {
 }
 
 async function api(path, options = {}) {
+  if (window.XIAOFEI_API) {
+    return window.XIAOFEI_API.request(path, {
+      businessId: state.businessId,
+      ...options
+    });
+  }
   const response = await fetch(withBusiness(path), {
     headers: { "Content-Type": "application/json" },
     ...options
