@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>正在跳转</title>
+</head>
+<body>
+  <script>
+    (() => {
+      const parts = location.pathname.split("/").filter(Boolean);
+      const base = parts.length ? `/${parts[0]}/` : "/";
+      const leaf = parts[parts.length - 1] || "";
+      const page = leaf.includes("admin")
+        ? "admin.html"
+        : leaf.includes("platform")
+          ? "platform.html"
+          : "index.html";
+      location.replace(`${base}${page}${location.search}${location.hash}`);
+    })();
+  </script>
+</body>
+</html>

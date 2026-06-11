@@ -37,6 +37,13 @@ function withBusiness(path) {
   return `${path}${separator}business=${encodeURIComponent(adminState.businessId)}`;
 }
 
+function pageHref(page, businessId = adminState.businessId) {
+  const url = new URL(page, location.href);
+  url.search = "";
+  url.searchParams.set("business", businessId);
+  return `${url.pathname}${url.search}`;
+}
+
 function escapeHtml(value) {
   return String(value ?? "")
     .replaceAll("&", "&amp;")
@@ -84,10 +91,17 @@ async function loadConfig() {
   document.title = `${data.business.name} 老板后台`;
   els.shopLogo.textContent = data.business.initials || "AI";
   els.adminSubtitle.textContent = `${data.business.name} 客户线索管理`;
-  els.customerLink.href = `/chat?business=${encodeURIComponent(data.business.id)}`;
+  els.customerLink.href = pageHref("index.html", data.business.id);
   els.loginHint.textContent = `${data.business.name} 后台登录`;
   const exportLink = document.querySelector(".download-button");
-  if (exportLink) exportLink.href = withBusiness("/api/admin/export.csv");
+  if (exportLink) {
+    if (window.XIAOFEI_STATIC_API?.enabled) {
+      exportLink.href = "#";
+      exportLink.dataset.staticExport = "true";
+    } else {
+      exportLink.href = withBusiness("/api/admin/export.csv");
+    }
+  }
 }
 
 function setLoggedIn(isLoggedIn) {
@@ -250,6 +264,21 @@ els.adminLeadList.addEventListener("click", async (event) => {
 els.resetBtn.addEventListener("click", async () => {
   await api("/api/admin/reset", { method: "POST", body: "{}" });
   await loadLeads();
+});
+
+document.querySelector(".download-button")?.addEventListener("click", (event) => {
+  if (!window.XIAOFEI_STATIC_API?.enabled) return;
+  event.preventDefault();
+  const csv = window.XIAOFEI_STATIC_API.exportCsv(adminState.businessId);
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `${adminState.businessId}-leads.csv`;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
 });
 
 loadConfig().then(checkSession).catch(() => setLoggedIn(false));

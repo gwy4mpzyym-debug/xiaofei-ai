@@ -30,6 +30,13 @@ function withBusiness(path) {
   return `${path}${separator}business=${encodeURIComponent(state.businessId)}`;
 }
 
+function pageHref(page, businessId = state.businessId) {
+  const url = new URL(page, location.href);
+  url.search = "";
+  url.searchParams.set("business", businessId);
+  return `${url.pathname}${url.search}`;
+}
+
 function escapeHtml(value) {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -91,7 +98,7 @@ async function loadConfig() {
   document.title = `${data.business.name} AI 接待系统`;
   els.shopLogo.textContent = data.business.initials || "AI";
   els.shopName.textContent = data.business.name;
-  els.adminLink.href = `/admin?business=${encodeURIComponent(data.business.id)}`;
+  els.adminLink.href = pageHref("admin.html", data.business.id);
   els.chatSubtitle.textContent = `询问价格、营业时间或预约${data.business.services.map((item) => item.name).join("/")}`;
   els.modeBadge.textContent = data.mode === "openai" ? "OpenAI 模式" : "演示模式";
   els.modelBadge.textContent = data.model;

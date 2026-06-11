@@ -20,6 +20,13 @@ const platformState = {
   editingId: ""
 };
 
+function pageHref(page, businessId = "") {
+  const url = new URL(page, location.href);
+  url.search = "";
+  if (businessId) url.searchParams.set("business", businessId);
+  return `${url.pathname}${url.search}`;
+}
+
 function escapeHtml(value) {
   return String(value ?? "")
     .replaceAll("&", "&amp;")
@@ -69,10 +76,10 @@ function renderBusinesses(businesses) {
         </div>
       ` : ""}
       <div class="business-actions">
-        <a href="/chat?business=${encodeURIComponent(business.id)}">顾客页</a>
-        <a href="/admin?business=${encodeURIComponent(business.id)}">老板后台</a>
-        <button type="button" data-copy="/chat?business=${encodeURIComponent(business.id)}">复制顾客链接</button>
-        <button type="button" data-copy="/admin?business=${encodeURIComponent(business.id)}">复制后台链接</button>
+        <a href="${pageHref("index.html", business.id)}">顾客页</a>
+        <a href="${pageHref("admin.html", business.id)}">老板后台</a>
+        <button type="button" data-copy="${pageHref("index.html", business.id)}">复制顾客链接</button>
+        <button type="button" data-copy="${pageHref("admin.html", business.id)}">复制后台链接</button>
         ${platformState.unlocked ? `<button type="button" data-edit="${encodeURIComponent(business.id)}">编辑</button>` : ""}
         ${platformState.unlocked ? `<button type="button" data-delete="${encodeURIComponent(business.id)}">删除</button>` : ""}
       </div>
@@ -219,8 +226,8 @@ creatorForm.addEventListener("submit", async (event) => {
     const id = data.business.id;
     creatorResult.innerHTML = `
       <strong>${escapeHtml(data.business.name)} ${editingId ? "已更新" : "已生成"}</strong>
-      <a href="/chat?business=${encodeURIComponent(id)}">打开顾客页</a>
-      <a href="/admin?business=${encodeURIComponent(id)}">打开老板后台</a>
+      <a href="${pageHref("index.html", id)}">打开顾客页</a>
+      <a href="${pageHref("admin.html", id)}">打开老板后台</a>
     `;
     setCreatorMode("new");
     await loadBusinesses();
@@ -264,7 +271,7 @@ grid.addEventListener("click", async (event) => {
 
   const copyButton = event.target.closest("button[data-copy]");
   if (copyButton) {
-    const url = new URL(copyButton.dataset.copy, location.origin).toString();
+    const url = new URL(copyButton.dataset.copy, location.href).toString();
     try {
       await navigator.clipboard.writeText(url);
     } catch {
@@ -277,7 +284,7 @@ grid.addEventListener("click", async (event) => {
     }
     copyButton.textContent = "已复制";
     setTimeout(() => {
-      copyButton.textContent = copyButton.dataset.copy.includes("/admin") ? "复制后台链接" : "复制顾客链接";
+      copyButton.textContent = copyButton.dataset.copy.includes("admin") ? "复制后台链接" : "复制顾客链接";
     }, 1200);
     return;
   }
