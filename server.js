@@ -1248,16 +1248,22 @@ async function handleApi(req, res) {
 
 loadBusinesses();
 
-const server = http.createServer((req, res) => {
+function appHandler(req, res) {
   if (req.url.startsWith("/api/")) {
     handleApi(req, res);
   } else {
     serveStatic(req, res);
   }
-});
+}
 
-server.listen(PORT, HOST, () => {
-  Object.keys(businesses).forEach(ensureLeadFile);
-  console.log(`多商家 AI 自动化系统已启动: http://127.0.0.1:${PORT}`);
-  console.log(OPENAI_API_KEY ? `OpenAI 模式：${OPENAI_MODEL}` : "演示模式：未设置 OPENAI_API_KEY");
-});
+Object.keys(businesses).forEach(ensureLeadFile);
+
+if (require.main === module) {
+  const server = http.createServer(appHandler);
+  server.listen(PORT, HOST, () => {
+    console.log(`多商家 AI 自动化系统已启动: http://127.0.0.1:${PORT}`);
+    console.log(OPENAI_API_KEY ? `OpenAI 模式：${OPENAI_MODEL}` : "演示模式：未设置 OPENAI_API_KEY");
+  });
+}
+
+module.exports = appHandler;
